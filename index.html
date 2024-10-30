@@ -32,6 +32,18 @@
     </head>
 
     <body>
+        <div class="dropdown">
+            <button onclick="dropdownAppear()" class="dropbtn">Dropdown</button>
+            <div id="myDropdown" class="dropdown-content">
+              <a onclick="buildSchedule('A')">A day schedule</a>
+              <a onclick="buildSchedule('B')">B day schedule</a>
+              <a onclick="buildSchedule('C')">C day schedule</a>
+              <a onclick="buildSchedule('D')">D day schedule</a>
+              <a onclick="buildSchedule('E')">E day schedule</a>
+              <a onclick="buildSchedule('F')">F day schedule</a>
+              <a onclick="buildSchedule('G')">G day schedule</a>
+            </div>
+          </div>
         <table id="schedule-table">
             <thead>
                 <tr>
