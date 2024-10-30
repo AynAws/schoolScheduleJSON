@@ -15,7 +15,7 @@ $.ajax({
             build.push(getByPeriod(rotatedIndex + 1));
           }
         } else {
-          build = [getByPeriod(3), getByPeriod(4), getByPeriod(7)]
+          build = [getByPeriod(3), getByPeriod(4), getByPeriod(7)];
         }
         build.push(getByPeriod(0)); // Always add schedule[0] (lunch) in the middle
         if (letter !== "G") {
