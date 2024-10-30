@@ -24,7 +24,8 @@ $.ajax({
             build.push(schedule[periodIndex]);
           }        
         } else {
-          build.push([schedule[5], schedule[6]])
+          build.push(schedule[5]);
+          build.push(schedule[6]);
         }
         tableBody.find(".remove").remove();
         // Loop through the schedule array and create table rows
