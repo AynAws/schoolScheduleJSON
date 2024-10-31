@@ -1,5 +1,8 @@
+let urlJSON; // global scope
+let savedData = localStorage.getItem('userSchedule');
+savedData = JSON.parse(savedData);
 if (!savedData) {
-  let urlJSON = prompt("If you have an npoint link, paste it into the box below. Otherwise, leave the box empty and hit enter. See https://www.npoint.io/docs/29d19752fa608eea5817 for npoint format."); // global scope
+  urlJSON = prompt("If you have an npoint link, paste it into the box below. Otherwise, leave the box empty and hit enter. See https://www.npoint.io/docs/29d19752fa608eea5817 for npoint format.");
 }
 function getUserScheduleP1() {
   if (!urlJSON) {
@@ -10,10 +13,8 @@ function getUserScheduleP1() {
 function getUserScheduleP2(schedule) {
   console.log("Running getUserScheduleP2") // checks to see if function runs
   // Retrieve saved schedule from local storage, if available
-  let savedData = localStorage.getItem('userSchedule');
   if (savedData) {
       // Parse saved data and update empty fields in the schedule
-      savedData = JSON.parse(savedData);
       schedule.forEach((item, index) => {
           if (!item.name) item.name = savedData[index]?.name || "";
           if (!item.teacher) item.teacher = savedData[index]?.teacher || "";
