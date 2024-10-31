@@ -6,7 +6,7 @@ function getUserScheduleP1() {
 }
 // Initialize the user's schedule based on JSON data and user input
 function getUserScheduleP2(schedule) {
-  console.log("Running getUserSchedule") // checks to see if function runs
+  console.log("Running getUserScheduleP2") // checks to see if function runs
   // Retrieve saved schedule from local storage, if available
   let savedData = localStorage.getItem('userSchedule');
   if (savedData) {
@@ -19,7 +19,7 @@ function getUserScheduleP2(schedule) {
       });
   }
   // Prompt user input for empty fields and update schedule
-if (!urlJSON) {
+if (!urlJSON || urlJSON === "https://api.npoint.io/29d19752fa608eea5817") {
   console.log("urlJSON is checked!")
   schedule.forEach((item) => {
       if (!item.name) item.name = prompt(`Enter subject name for period ${item.period}:`, item.name || "");
@@ -74,18 +74,16 @@ $.ajax({
         // Loop through the schedule array and create table rows
         let counter = -1;
         build.forEach(item => {
-          let time;
-          switch (item) {
+          counter++;
+          let time = "N/A";
+          switch (counter) {
             case 0:
-              time = "12:00 - 12:35";
-              break;
-            case 1:
               time = "8:24 - 9:31";
               break;
-            case 2:
+            case 1:
               time = "9:36 - 10:43";
               break;
-            case 3:
+            case 2:
               time = "10:48 - 11:55";
               break;
             case 4:
@@ -94,6 +92,9 @@ $.ajax({
             case 5:
               time = "1:53 - 3:00";
               break;
+            case 3:
+              time = "12:00 - 12:35";
+              break;
           }
             let row = `
                 <tr class="remove">
@@ -101,12 +102,11 @@ $.ajax({
                     <td>${item.name || "N/A"}</td>
                     <td>${item.teacher || "N/A"}</td>
                     <td>${item.room || "N/A"}</td>
-                    <td>${time || "N/A"}</td>
+                    <td>${time}</td>
                 </tr>
             `;
             tableBody.append(row);
         });
-        counter = 0;
     },
     error: function (jqXHR, textStatus, errorThrown) {
         console.error("Error loading data:", textStatus, errorThrown); // Log error details
