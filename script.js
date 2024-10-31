@@ -1,4 +1,6 @@
-let urlJSON = prompt("If you have an npoint link, paste it into the box below. Otherwise, leave the box empty and hit enter. See https://www.npoint.io/docs/29d19752fa608eea5817 for npoint format."); // global scope
+if (!savedData) {
+  let urlJSON = prompt("If you have an npoint link, paste it into the box below. Otherwise, leave the box empty and hit enter. See https://www.npoint.io/docs/29d19752fa608eea5817 for npoint format."); // global scope
+}
 function getUserScheduleP1() {
   if (!urlJSON) {
     urlJSON = "https://api.npoint.io/29d19752fa608eea5817";
