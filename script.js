@@ -1,8 +1,14 @@
+let urlJSON = prompt("If you have an npoint link, paste it into the box below. Otherwise, leave the box empty and hit enter. See https://www.npoint.io/docs/29d19752fa608eea5817 for npoint format."); // global scope
+function getUserScheduleP1() {
+  if (!urlJSON) {
+    urlJSON = "https://api.npoint.io/29d19752fa608eea5817";
+  }
+}
 // Initialize the user's schedule based on JSON data and user input
-function getUserSchedule(schedule) {
+function getUserScheduleP2(schedule) {
+  console.log("Running getUserSchedule") // checks to see if function runs
   // Retrieve saved schedule from local storage, if available
   let savedData = localStorage.getItem('userSchedule');
-  
   if (savedData) {
       // Parse saved data and update empty fields in the schedule
       savedData = JSON.parse(savedData);
@@ -12,28 +18,31 @@ function getUserSchedule(schedule) {
           if (!item.room) item.room = savedData[index]?.room || "";
       });
   }
-
   // Prompt user input for empty fields and update schedule
+if (!urlJSON) {
+  console.log("urlJSON is checked!")
   schedule.forEach((item) => {
       if (!item.name) item.name = prompt(`Enter subject name for period ${item.period}:`, item.name || "");
       if (!item.teacher) item.teacher = prompt(`Enter teacher for period ${item.period}:`, item.teacher || "");
       if (!item.room) item.room = prompt(`Enter room for period ${item.period}:`, item.room || "");
   });
-
+}
   // Save the updated schedule to local storage
   localStorage.setItem('userSchedule', JSON.stringify(schedule));
 }
 
 function buildSchedule(letter) {
+  console.log("Schedule build func runs!")
+  getUserScheduleP1();
 $.ajax({
     type: "GET",
-    url: "https://api.npoint.io/29d19752fa608eea5817",
+    url: urlJSON,
     dataType: "JSON",
     success: function (response) {
         const letterIndex = letter.charCodeAt(0) - 'A'.charCodeAt(0); // assigns each letter a number
         console.log(`Letter is ${letterIndex}.`); // A=0, B=1, C=2...
         const schedule = response.schedule;
-        getUserSchedule(schedule); // fill empty data with user schedule
+        getUserScheduleP2(schedule); // fill empty data with user schedule
         const tableBody = $("#schedule-table tbody");
         let build = [];
         const getByPeriod = (period) => schedule.filter(item => item.period === period)[0];
@@ -63,6 +72,7 @@ $.ajax({
         console.log(build); // checking array to see if all is well
         tableBody.find(".remove").remove();
         // Loop through the schedule array and create table rows
+        let counter = -1;
         build.forEach(item => {
           let time;
           switch (item) {
@@ -96,6 +106,7 @@ $.ajax({
             `;
             tableBody.append(row);
         });
+        counter = 0;
     },
     error: function (jqXHR, textStatus, errorThrown) {
         console.error("Error loading data:", textStatus, errorThrown); // Log error details
