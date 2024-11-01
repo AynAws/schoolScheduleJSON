@@ -83,9 +83,9 @@ $.ajax({
           time0 = "8:24 - 9:14"
           time1 = "9:19 - 10:09"
           time2 = "10:14 - 11:04"
-          time4 = "11:09 - 11:59"
-          time5 = "12:04 - 12:54"
-          time3 = undefined;
+          time3 = "11:09 - 11:59"
+          time4 = "12:04 - 12:54"
+          time5 = undefined;
         } else if (delayedOpening && !earlyDismissal) {
           time0 = "9:54 - 10:44"
           time1 = "10:49 - 11:39"
